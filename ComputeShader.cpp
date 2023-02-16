@@ -7,6 +7,8 @@
 #include <sstream>
 #include <vector>
 
+// adapted from https ://medium.com/@daniel.coady/compute-shaders-in-opengl-4-3-d1c741998c03
+
 ComputeShader::ComputeShader(const char* path, unsigned int x, unsigned int y) {
     work_size.x = x;
     work_size.y = y;

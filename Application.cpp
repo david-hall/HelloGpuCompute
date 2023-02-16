@@ -4,6 +4,8 @@
 
 #include "ComputeShader.h"
 
+// adapted from https://www.glfw.org/documentation.html
+
 int main(void)
 {
     /* Initialize the library */
@@ -65,19 +67,21 @@ int main(void)
         computeShader.dispatch();
         computeShader.wait();
 
+        // Since I don't care to render anything, I will comment out this rendering code
+        // leaving just the GPU cmputations in the loop
 
-        /* Render here */
-        glClear(GL_COLOR_BUFFER_BIT);
+        ///* Render here */
+        //glClear(GL_COLOR_BUFFER_BIT);
 
-        // https://youtu.be/OR4fNpBjmq8?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=1135
-        glBegin(GL_TRIANGLES);
-        glVertex2f(-0.5f, -0.5f);
-        glVertex2f( 0.0f,  0.5f);
-        glVertex2f( 0.5f, -0.5f);
-        glEnd();
+        //// https://youtu.be/OR4fNpBjmq8?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=1135
+        //glBegin(GL_TRIANGLES);
+        //glVertex2f(-0.5f, -0.5f);
+        //glVertex2f( 0.0f,  0.5f);
+        //glVertex2f( 0.5f, -0.5f);
+        //glEnd();
 
-        /* Swap front and back buffers */
-        glfwSwapBuffers(window);
+        ///* Swap front and back buffers */
+        //glfwSwapBuffers(window);
 
         /* Poll for and process events */
         glfwPollEvents();
