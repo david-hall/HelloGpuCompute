@@ -44,10 +44,10 @@ int main(void)
 
     // TODO: change values to use ints
     const unsigned int nValues = 10;
-    float values[nValues] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     ComputeShader computeShader("res\\shader.comp", nValues, 1);
     computeShader.use();
-    computeShader.set_values(values);
+    float values[nValues] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    computeShader.setValues(values);
 
     time_t prev = 0;
     time_t now;
@@ -59,7 +59,7 @@ int main(void)
             prev = now;
             // only retrieve and display the values once per second
             // so we don't bottleneck the GPU's calculations
-            auto data = computeShader.get_values();
+            auto data = computeShader.getValues();
             for (auto d : data) {
                 std::cout << std::fixed << std::setw(10) << std:: setprecision(0) << std::setfill(' ')
                     << d << " ";
@@ -74,20 +74,18 @@ int main(void)
 
         // Since I don't care to render anything, I will comment out this rendering code
         // leaving just the GPU computations in the loop
-
-        ///* Render here */
-        //glClear(GL_COLOR_BUFFER_BIT);
-
-        //// https://youtu.be/OR4fNpBjmq8?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=1135
-        //glBegin(GL_TRIANGLES);
-        //glVertex2f(-0.5f, -0.5f);
-        //glVertex2f( 0.0f,  0.5f);
-        //glVertex2f( 0.5f, -0.5f);
-        //glEnd();
-
-        ///* Swap front and back buffers */
-        //glfwSwapBuffers(window);
-
+        //if(false) {
+        //    /* Render here */
+        //    glClear(GL_COLOR_BUFFER_BIT);
+        //    // https://youtu.be/OR4fNpBjmq8?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=1135
+        //    glBegin(GL_TRIANGLES);
+        //    glVertex2f(-0.5f, -0.5f);
+        //    glVertex2f(0.0f, 0.5f);
+        //    glVertex2f(0.5f, -0.5f);
+        //    glEnd();
+        //    /* Swap front and back buffers */
+        //    glfwSwapBuffers(window);
+        //}
         /* Poll for and process events */
         glfwPollEvents();
     }

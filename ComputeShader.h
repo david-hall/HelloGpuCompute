@@ -3,7 +3,7 @@
 
 class ComputeShader {
 public: 
-    ComputeShader(const char * path, unsigned int x, unsigned int y);
+    ComputeShader(const char* path, unsigned int x, unsigned int y);
 
     ~ComputeShader();
 
@@ -13,18 +13,16 @@ public:
 
     void wait();
 
-    void set_values(float* values);
+    void setValues(float* values);
 
-    std::vector<float> get_values();
+    std::vector<float> getValues();
 
 private:
-    unsigned int id;
-    unsigned int out_tex;
+    unsigned int workSizeX;
+    unsigned int workSizeY;
+    unsigned int workSizeZ;
+    unsigned int workVolume; // x * y * z
 
-    struct uvec2 {
-        unsigned int x;
-        unsigned int y;
-    };
-
-    uvec2 work_size;
+    unsigned int programId;
+    unsigned int ioTexture;
 };
