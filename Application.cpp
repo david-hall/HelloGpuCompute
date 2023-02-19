@@ -25,7 +25,10 @@ int main(void)
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
 
-    std::cout << "GL_VERSION: " << glGetString(GL_VERSION) << std::endl;
+    int mmba;
+    glGetIntegerv(GL_MIN_MAP_BUFFER_ALIGNMENT, &mmba);
+    std::cout << "GL_VERSION: " << glGetString(GL_VERSION) << std::endl
+        << "GL_MIN_MAP_BUFFER_ALIGNMENT: " << mmba << std::endl;
 
     // init glew after context is current and before ComputeShader c'tor
     if (glewInit() != GLEW_OK) {
