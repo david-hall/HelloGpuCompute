@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <iostream>
+#include <iomanip>
 
 #include "ComputeShader.h"
 
@@ -60,7 +61,8 @@ int main(void)
             // so we don't bottleneck the GPU's calculations
             auto data = computeShader.get_values();
             for (auto d : data) {
-                std::cout << d << " ";
+                std::cout << std::fixed << std::setw(10) << std:: setprecision(0) << std::setfill(' ')
+                    << d << " ";
             }
             std::cout << std::endl;
         }
@@ -71,7 +73,7 @@ int main(void)
         computeShader.wait();
 
         // Since I don't care to render anything, I will comment out this rendering code
-        // leaving just the GPU cmputations in the loop
+        // leaving just the GPU computations in the loop
 
         ///* Render here */
         //glClear(GL_COLOR_BUFFER_BIT);
