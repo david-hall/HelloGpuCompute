@@ -16,18 +16,35 @@
 // more details at https://www.khronos.org/opengl/wiki/Compute_Shader#Outputs
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
+
 layout(r32f, binding = 0) uniform image2D ioTexture;
+
+// See the "Shader binding index setting" section of
+// https://www.khronos.org/opengl/wiki/Interface_Block_(GLSL)#Shader_binding_index_setting
+// binding index of ioBuffer is arbitrary but it has to match the corresponding ssboIndex in the client's call to glBindBufferBase()
+layout(std430, binding = 0) buffer myBufferInterface
+{
+    uint ioBuffer[];
+};
 
 void main() {
     // get position to read/write data from
-    ivec2 pos = ivec2( gl_GlobalInvocationID.xy );
+    ivec2 texPos = ivec2( gl_GlobalInvocationID.xy );
 
     // get value stored in the image
-    float ioVal = imageLoad( ioTexture, pos ).r;
-
+    float ioVal = imageLoad( ioTexture, texPos ).r;
+    
     // calc new ioVal
     ioVal++;
 
     // store new value in image
-    imageStore( ioTexture, pos, vec4( ioVal, 0.0, 0.0, 0.0 ) );
+    imageStore( ioTexture, texPos, vec4( ioVal, 0.0, 0.0, 0.0 ) );
+
+    // store new value in ioBuffer
+    uint bufPos = gl_GlobalInvocationID.x;
+    if(bufPos == 0) {
+        ioBuffer[bufPos] = gl_NumWorkGroups.x;
+    } else {
+        ioBuffer[bufPos] = bufPos;
+    }
 }
