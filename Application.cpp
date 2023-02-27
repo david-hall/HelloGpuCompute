@@ -13,6 +13,10 @@ int main(void)
     if (!glfwInit())
         return -1;
 
+    // create the window as initially hidden rather than just iconifying or hiding it later
+    // TODO: I'm not sure if this affects all subsequent new windows or just the next one
+    glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
     /* Create a windowed mode window and its OpenGL context */
     GLFWwindow* window = glfwCreateWindow(640, 480, "Hello GPU Compute", NULL, NULL);
     if (!window)
@@ -21,7 +25,7 @@ int main(void)
         return -1;
     }
 
-    glfwIconifyWindow(window);
+    //glfwHideWindow(window);
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
