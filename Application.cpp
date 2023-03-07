@@ -14,7 +14,6 @@ int main(void)
         return -1;
 
     // create the window as initially hidden rather than just iconifying or hiding it later
-    // TODO: I'm not sure if this affects all subsequent new windows or just the next one
     glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 
     /* Create a windowed mode window and its OpenGL context */
@@ -24,8 +23,6 @@ int main(void)
         glfwTerminate();
         return -1;
     }
-
-    //glfwHideWindow(window);
 
     /* Make the window's context current */
     glfwMakeContextCurrent(window);
@@ -52,7 +49,6 @@ int main(void)
     // I'll disable any frame-per-second rendering limits anyway.
     glfwSwapInterval(0);
 
-    // TODO: change values to use ints
     const unsigned int nValues = 10;
     float textureValues[nValues] = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     int bufferValues[nValues] = { 1, 1, 2, 3, 5, 8, 13, 21, 33, 54 };
@@ -97,20 +93,6 @@ int main(void)
         computeShader.dispatch();
         computeShader.wait();
 
-        // Since I don't care to render anything, I will comment out this rendering code
-        // leaving just the GPU computations in the loop
-        //if(false) {
-        //    /* Render here */
-        //    glClear(GL_COLOR_BUFFER_BIT);
-        //    // https://youtu.be/OR4fNpBjmq8?list=PLlrATfBNZ98foTJPJ_Ev03o2oq3-GGOS2&t=1135
-        //    glBegin(GL_TRIANGLES);
-        //    glVertex2f(-0.5f, -0.5f);
-        //    glVertex2f(0.0f, 0.5f);
-        //    glVertex2f(0.5f, -0.5f);
-        //    glEnd();
-        //    /* Swap front and back buffers */
-        //    glfwSwapBuffers(window);
-        //}
         /* Poll for and process events */
         glfwPollEvents();
     }
